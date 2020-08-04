@@ -1,4 +1,4 @@
-package com.example.testofflinemovie.responseObj
+package com.example.testofflinemovie.models
 
 import com.google.gson.annotations.SerializedName
 
@@ -13,10 +13,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 For support, please feel free to contact me at https://www.linkedin.com/in/syedabsar */
 
-data class MoviesPopular (
+data class MoviesPopularModel (
 
-	@SerializedName("page") val page : Int,
-	@SerializedName("results") val results : List<MovieEntity>,
-	@SerializedName("total_results") val total_results : Int,
-	@SerializedName("total_pages") val total_pages : Int
+    @SerializedName("page") val page : Int,
+    @SerializedName("results") val results : List<MovieModel>,
+    @SerializedName("total_results") val total_results : Int,
+    @SerializedName("total_pages") val total_pages : Int
 )

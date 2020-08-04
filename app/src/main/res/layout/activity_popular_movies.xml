@@ -4,21 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ui.PopularMoviesActivity">
 
-<!--    <fragment-->
-<!--        android:id="@+id/fragment"-->
-<!--        android:name="com.example.testofflinemovie.list.MovieFragment"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="0dp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvListPopularMoviesTest"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:id="@+id/rvListPopularMovies"
+        android:layout_width="409dp"
+        android:layout_height="729dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

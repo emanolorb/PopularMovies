@@ -1,4 +1,4 @@
-package com.example.testofflinemovie.responseObj
+package com.example.testofflinemovie.Respositories
 
 import com.example.testofflinemovie.common.ApiConstants
 import okhttp3.Interceptor

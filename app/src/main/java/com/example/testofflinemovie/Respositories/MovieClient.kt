@@ -1,7 +1,6 @@
-package com.example.testofflinemovie.responseObj.moviesRespositories
+package com.example.testofflinemovie.Respositories
 
 import com.example.testofflinemovie.common.ApiConstants
-import com.example.testofflinemovie.responseObj.ResquestInterceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

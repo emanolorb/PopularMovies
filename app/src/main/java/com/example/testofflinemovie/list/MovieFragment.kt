@@ -1,6 +1,5 @@
 package com.example.testofflinemovie.list
 
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -12,17 +11,17 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.testofflinemovie.R
-import com.example.testofflinemovie.data.room.MovieViewModel
-import com.example.testofflinemovie.responseObj.MovieEntity
+import com.example.testofflinemovie.data.MovieViewModel
+import com.example.testofflinemovie.models.MovieModel
 import java.util.ArrayList
 
 class MovieFragment : Fragment() {
     private lateinit var moviesViewModel: MovieViewModel
     private  lateinit var movieAdapter: MyMovieRecyclerViewAdapter
-    private var popularMovies : List<MovieEntity> = ArrayList()
+    private var popularMovies : List<MovieModel> = ArrayList()
 
     private var columnCount = 2
-    var movieList : List<MovieEntity> = listOf()
+    var movieList : List<MovieModel> = listOf()
     // private var listener: OnListFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,26 +35,25 @@ class MovieFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_movie_list, container, false)
         // optenemos el viewModel
-        moviesViewModel = ViewModelProvider(this).get(MovieViewModel::class.java)
-
-        movieAdapter = MyMovieRecyclerViewAdapter()
-
-        // Set the adapter
-        if (view is RecyclerView) {
-            with(view) {
-                layoutManager = when {
-                    columnCount <= 1 -> LinearLayoutManager(context)
-                    else -> GridLayoutManager(context, columnCount)
-                }
-                adapter = movieAdapter
-            }
-        }
-        // Observer de las peliculas
-
-        moviesViewModel.getPopularMovies().observe(viewLifecycleOwner, Observer {
-            popularMovies = it
-            movieAdapter.setData(popularMovies)
-        })
+//        moviesViewModel = ViewModelProvider(this).get(MovieViewModel::class.java)
+//
+//        movieAdapter = MyMovieRecyclerViewAdapter()
+//
+//        // Set the adapter
+//        if (view is RecyclerView) {
+//            with(view) {
+//                layoutManager = when {
+//                    columnCount <= 1 -> LinearLayoutManager(context)
+//                    else -> GridLayoutManager(context, columnCount)
+//                }
+//                adapter = movieAdapter
+//            }
+//        }
+//        // Observer de las peliculas
+//        moviesViewModel.getPopularMovies().observe(viewLifecycleOwner, Observer {
+//            popularMovies = it
+//            movieAdapter.setData(popularMovies)
+//        })
 
         return view
     }

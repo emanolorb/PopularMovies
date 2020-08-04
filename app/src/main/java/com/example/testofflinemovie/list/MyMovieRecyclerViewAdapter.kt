@@ -8,29 +8,24 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import coil.api.load
-import coil.transform.CircleCropTransformation
-import com.bumptech.glide.Glide
 import com.example.testofflinemovie.R
 import com.example.testofflinemovie.common.ApiConstants
 import com.example.testofflinemovie.common.MyApp
-import com.example.testofflinemovie.responseObj.MovieEntity
+import com.example.testofflinemovie.common.tools.debug_print
+import com.example.testofflinemovie.models.MovieModel
 
 import kotlinx.android.synthetic.main.fragment_movie.view.*
 
 
-class MyMovieRecyclerViewAdapter() : RecyclerView.Adapter<MyMovieRecyclerViewAdapter.ViewHolder>() {
+open class MyMovieRecyclerViewAdapter(movieList: List<MovieModel>, val clickListener: (MovieModel) -> Unit) : RecyclerView.Adapter<MyMovieRecyclerViewAdapter.ViewHolder>() {
 
     private val mOnClickListener: View.OnClickListener
-    val contextGlobal: Context = MyApp.instance
-    private var movies: List<MovieEntity> = ArrayList()
+    private var movies: List<MovieModel> = ArrayList()
 
     init {
+        this.movies = movieList
         mOnClickListener = View.OnClickListener { v ->
-            val item = v.tag as MovieEntity
-            println("onClickListener MyMovieReciclerView")
-            // Notify the active callbacks interface (the activity, if the fragment is attached to
-            // one) that an item has been selected.
-            // mListener?.onListFragmentInteraction(item)
+            val item = v.tag as MovieModel
         }
     }
     // Fragment Movie es el xml de un objeto de la lista
@@ -41,34 +36,25 @@ class MyMovieRecyclerViewAdapter() : RecyclerView.Adapter<MyMovieRecyclerViewAda
     }
     // setear el fragment item con el item real
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = movies[position]
-        holder.ranking.text = item.vote_average.toString()
-        holder.title.text = item.original_title.toString()
-        //Glide.with(contextGlobal).load(ApiConstants.IMAGE_API_URL.plus(item.poster_path)).into(holder.coverImgView)
-        holder.coverImgView.load(ApiConstants.IMAGE_API_URL.plus(item.poster_path)){
-            crossfade(true)
-            placeholder(R.drawable.ic_cinema_color)
-            transformations(CircleCropTransformation())
-        }
-        with(holder.mView) {
-            tag = item
-            setOnClickListener(mOnClickListener)
-        }
+        (holder as ViewHolder).bind(movies[position], clickListener)
     }
 
     override fun getItemCount(): Int = movies.size
-    fun setData(popularMovies: List<MovieEntity>?){
+    fun setData(popularMovies: List<MovieModel>?){
         movies =   popularMovies!!
         notifyDataSetChanged()
     }
-    // se inicializan los objetos del adapter
-    inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
-        val coverImgView : ImageView = mView.imageViewCover
-        val ranking: TextView = mView.Average
-        val title: TextView = mView.tvMovieTitle
-
-//        override fun toString(): String {
-//            return super.toString() + " '" + mContentView.text + "'"
-//        }
+    class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
+        fun bind(part: MovieModel, clickListener: (MovieModel) -> Unit) {
+            mView.Average.text = part.vote_average.toString()
+            mView.tvDescription.text = part.overview
+            mView.tvMovieTitle.text = part.original_title
+            mView.imageViewCover.load(ApiConstants.IMAGE_API_URL.plus(part.poster_path)){
+                //crossfade(true)
+                placeholder(R.drawable.ic_cinema_color)
+            }
+            mView.setOnClickListener { clickListener(part)}
+        }
     }
 }
+
