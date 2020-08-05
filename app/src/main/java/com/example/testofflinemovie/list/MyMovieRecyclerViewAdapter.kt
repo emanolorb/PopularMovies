@@ -1,17 +1,12 @@
 package com.example.testofflinemovie.list
 
-import android.content.Context
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import coil.api.load
 import com.example.testofflinemovie.R
 import com.example.testofflinemovie.common.ApiConstants
-import com.example.testofflinemovie.common.MyApp
-import com.example.testofflinemovie.common.tools.debug_print
 import com.example.testofflinemovie.models.MovieModel
 
 import kotlinx.android.synthetic.main.fragment_movie.view.*

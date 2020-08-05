@@ -1,6 +1,7 @@
 package com.example.testofflinemovie.Respositories
 
 import com.example.testofflinemovie.common.ApiConstants
+import com.example.testofflinemovie.common.tools.debug_print
 import okhttp3.Interceptor
 import okhttp3.Response
 
@@ -11,7 +12,8 @@ class ResquestInterceptor : Interceptor {
         var newUrl = originalUrl.newBuilder()
             .addQueryParameter("api_key", ApiConstants.TMDB_API_KE)
             .addQueryParameter("language", "es-Es")
-            .addQueryParameter("page", "1").build()
+            .build()
+        debug_print(newUrl.toString(), "newUrl")
         var request = originalRequest.newBuilder().url(newUrl).build()
         return chain.proceed(request)
     }

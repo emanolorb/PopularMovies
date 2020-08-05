@@ -29,13 +29,11 @@ class MovieRepository{
         val call : Call<MoviesPopularModel> = theMoviesApiService!!.getPopularMovies()
         call.enqueue(object :Callback<MoviesPopularModel>{
             override fun onFailure(call: Call<MoviesPopularModel>, t: Throwable) {
-                Toast.makeText(MyApp.instance, "Error en la llamada", Toast.LENGTH_LONG).show()
-            }
+                debug_print("error----------------------------------")
+                debug_print(call.toString())
+                debug_print(t.toString())            }
             override fun onResponse(call: Call<MoviesPopularModel>, response: Response<MoviesPopularModel>) {
-                Toast.makeText(MyApp.instance, "Exito con el request del servidor", Toast.LENGTH_LONG).show()
                 if (response.isSuccessful){
-                    debug_print(response.body()?.results?.size.toString(), "Size")
-                    debug_print(response.body()?.results.toString(), "Resultados")
                     popularMovies?.value = response.body()?.results
                 }
             }
@@ -48,15 +46,12 @@ class MovieRepository{
         debug_print(call.toString(),"se crea call")
         call.enqueue(object : Callback<MovieDetailModel>{
             override fun onFailure(call: Call<MovieDetailModel>, t: Throwable) {
-                Toast.makeText(MyApp.instance, "Error en la llamada", Toast.LENGTH_LONG).show()
                 debug_print("error----------------------------------")
                 debug_print(call.toString())
                 debug_print(t.toString())
             }
             override fun onResponse(call: Call<MovieDetailModel>, response: Response<MovieDetailModel>) {
-                Toast.makeText(MyApp.instance, "Exito con el request del servidor", Toast.LENGTH_LONG).show()
                 if (response.isSuccessful){
-                    debug_print(response.body().toString(), "Movie Detail")
                     movieDetailMutable.value = response.body()
                 }
             }

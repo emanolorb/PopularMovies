@@ -1,3 +1,4 @@
+import com.example.testofflinemovie.models.moviesDetail.Belong_to_collection
 import com.google.gson.annotations.SerializedName
 
 /*
@@ -16,7 +17,7 @@ data class MovieDetailModel (
 
 	@SerializedName("adult") val adult : Boolean,
 	@SerializedName("backdrop_path") val backdrop_path : String,
-	@SerializedName("belongs_to_collection") val belongs_to_collection : String,
+	@SerializedName("belongs_to_collection") val belongs_to_collection : Belong_to_collection,
 	@SerializedName("budget") val budget : Int,
 	@SerializedName("genres") val genres : List<Genres>,
 	@SerializedName("homepage") val homepage : String,
